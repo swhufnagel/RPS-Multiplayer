@@ -1,0 +1,34 @@
+.resultsbox{
+    border: 1px gray solid;
+    width: 90%;
+    height: 60%;
+}
+.chatbox{
+    border: 1px gray solid;
+    width: 90%;
+    height: 60%;
+}
+.player1choice{
+    border: 1px gray solid;
+    width: 50%;
+    height: 59%;
+}
+.player2choice{
+    border: 1px gray solid;
+    width: 50%;
+    height: 59%;
+}
+.fade.in {
+    opacity: 1;
+  }
+  .modal.in .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+  .modal-backdrop .fade .in {
+    opacity: 0.5 !important;
+  }
+  .modal-backdrop.fade {
+      opacity: 0.5 !important;
+  }
