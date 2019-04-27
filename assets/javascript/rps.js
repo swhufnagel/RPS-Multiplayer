@@ -67,6 +67,8 @@ function showGuesses() {
 function checkWin() {
   console.log(playerOneData.choice);
   console.log(playerTwoData.choice);
+  console.log(players.player2Choice);
+  console.log(players.player1Choice);
   database.ref("/players/1").set({
     name: $(".player2").text(),
     choice: players.player2Choice
@@ -173,12 +175,14 @@ $(window).on("load", function () {
   database.ref("/picked").on("value", function(snapshot){
     if(snapshot.val().player1 === true){
       $(".player1choice").empty();
+      players.player1Picked = true;
     }
     if(snapshot.val().player2 === true){
       $(".player2choice").empty();
+      players.player2Picked = true;
+
     }
     if(snapshot.val().player1 === true && snapshot.val().player2 === true){
-      console.log("checking");
       checkWin();
     }
   })
@@ -212,7 +216,6 @@ $(document).on("click", ".submit", function () {
   }
   if ($(".name").val().trim() !== "" && currentPlayers < 2) {
     players.number++;
-    console.log(players.number);
     database.ref("count/").set({
       players: players.number
     })
@@ -232,6 +235,7 @@ $(document).on("click", ".submit", function () {
       })
     }
     else {
+      players.number++;
       database.ref("players/" + currentPlayers).set({
         name: $(".name").val().trim(),
         choice: ""
@@ -242,30 +246,44 @@ $(document).on("click", ".submit", function () {
 })
 
 $(document).on("click", ".choice", function () {
+  console.log('choice clicked')
   players.player1Choice = $(this).attr("id");
   players.player1Picked = true;
   database.ref("/picked").set({
-    player1: true,
+    player1: players.player1Picked,
     player2: players.player2Picked
-  })
+  });
+  console.log('player1', playerOneData);
   database.ref("/players/0").set({
     name: $(".player1").text(),
     choice: players.player1Choice
   });
+  // database.ref("/players/1").set({
+  //   name: $(".player2").text(),
+  //   choice: playerTwoData.choice
+  // });
+  
   $(".player1choice").empty();
 })
 $(document).on("click", ".choice2", function () {
+  console.log('choice 2 clicked')
+
+  database.ref().on('value', function(snapshot) {
+    console.log('snapshot', snapshot);
+  });
   players.player2Choice = $(this).attr("id");
   players.player2Picked = true;
   database.ref("/picked").set({
     player1: players.player1Picked,
-    player2: true
-  })
+    player2: players.player2Picked
+  });
+  console.log('player2', players.player2Choice);
+  // database.ref("/players/0").set({
+  //   name: $(".player1").text(),
+  //   choice: playerOneData.choice
+  // });
   database.ref("/players/1").set({
     name: $(".player2").text(),
     choice: players.player2Choice
   });
-  // $(".player2choice").empty();
-  console.log(playerOneData.choice);
-  console.log(playerTwoData.choice);
 })

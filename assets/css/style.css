@@ -27,6 +27,9 @@ body{
 .pick{
     background-color: rgba(170, 91, 0, 0.589);
 }
+.card-body{
+    padding:0;
+}
 .players{
     flex-direction: row;
 }
