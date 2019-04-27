@@ -1,22 +1,125 @@
 .resultsbox{
-    border: 1px gray solid;
     width: 90%;
-    height: 60%;
+    height: 100%;
+    min-height:50px;
+}
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background: linear-gradient(rgba(3, 148, 136, 0.671)1%,rgba(170, 91, 0, 0.589)105%,silver 0%)!important;
+    min-height: 760px;
+    /* background: linear-gradient(141deg, #9fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); */
+}
+.results{
+    margin-bottom: 10px;
 }
 .chatbox{
     border: 1px gray solid;
-    width: 90%;
-    height: 60%;
+    width: 85%;
+    height: 72%;
+    position:relative;
+    top:10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: auto;
+    background: linear-gradient(244deg, rgba(255, 255, 255, 0.479)-5%,rgba(220, 148, 89, 0.137)20%,rgba(0, 180, 165, 0.26)60%);
+}
+.pick{
+    background-color: rgba(170, 91, 0, 0.589);
+}
+.players{
+    flex-direction: row;
+}
+.player1, .player2, .head{
+    background-color: aqua;
+    background: rgba(3, 148, 136, 0.671);
+}
+.chatcontainer{
+    border: 1px darkgrey solid;
+    width:90%;
+    height: 215px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position:relative;
+    background-color: rgba(220, 147, 89, 0.849);
+}
+.holychat{
+    background-color: white;
+    z-index:3;
+}
+.login{
+    border: 1px rgba(3, 148, 136, 0.671) solid;
+}
+.login:hover{
+    background-color: rgba(70, 189, 179, 0.521);
+    border: 1px rgba(33, 153, 143, 0.671) solid;
+    box-shadow: 6px 8px 7px 0px black;
+}
+.card{
+    box-shadow: 3px 2px 4px 1px black;
+}
+#message{
+    background-color: rgba(255, 255, 255, 0.384);
+    border: grey 1px solid;
+}
+.little{
+border: 1px solid black;
+width: 100%;
+height: 250px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+position: relative;
+background-color: white;
+z-index: 100;
+}
+.chatholder{
+    border: 0.1px solid rgba(0, 0, 0, 0.452);
+    padding: 5px;
+    text-align: center;
+    background: rgba(3, 148, 136, 0.671);
+    box-shadow: 3px 2px 4px 1px black;
+}
+.modal-body{
+background-color: rgba(119, 119, 119, 0.596);
+}
+.modal-header{
+    background-color: rgba(220, 147, 89, 0.849);
+}
+.footy{
+    background-color: rgba(17, 139, 139, 0.712);
+}
+.choice, .choice2{
+margin:5px;
+}
+.chatentry{
+    position:absolute;
+    bottom:6px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    left: 20px;
+}
+#send{
+    box-shadow: 3px 2px 1px 0px black;
+    font-size:10px;
+}
+#message{
+    width:70%;
+    float: left; 
+    margin: 2px;
+    font-size:12px
 }
 .player1choice{
-    border: 1px gray solid;
     width: 50%;
-    height: 59%;
+    height: 100%;
+    min-height:100px;
 }
 .player2choice{
-    border: 1px gray solid;
     width: 50%;
-    height: 59%;
+    height: 100%;
+    min-height:100px;
 }
 .fade.in {
     opacity: 1;
@@ -31,4 +134,63 @@
   }
   .modal-backdrop.fade {
       opacity: 0.5 !important;
+  }
+  .sent{
+      font-size: 12px;
+      color: black;
+      padding: 5px;
+      background-color: lightgray;
+      border-radius: 19%;
+      margin:5px;
+  }
+  #send{
+      background-color: rgba(68, 239, 245, 0.356);
+  }
+  #send:hover{
+      border: 1px black solid;
+  }
+  .submit:hover{
+    box-shadow: 3px 4px 5px 0px black;
+    background-color:rgba(1, 126, 131, 0.795);
+    border: 1px black solid;
+  }
+  .sentholder{
+    text-align: right;
+    margin: 5px;
+  }
+  .repliesholder{
+    text-align: left;
+    margin: 5px;
+  }
+  .replies{
+    font-size: 12px;
+    color: black;
+    padding: 2px;
+    background-color: lightskyblue;
+    border-radius: 19%;
+    text-align: left;
+  }
+  .hide{
+      display:none;
+  }
+  .title{
+      font-size:58px;
+      font-weight: 700;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+  }
+  .login{
+      margin: 5px;
+      background-color: rgba(255, 255, 255, 0);
+      box-shadow: 4px 6px 4px 0px black;
+  }
+  .submit{
+    box-shadow: 3px 3px 2px 0px black;
+    background-color: rgba(0, 169, 175, 0.795);
+    border: 1px black solid;
+  }
+  
+  .logo{
+      height:250px;
+      width:360px;
   }

@@ -2,91 +2,122 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/> -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/hover.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <title>Multiplayer Rock Paper Scissors</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/hover.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <title>Multiplayer Rock Paper Scissors</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                Rock Paper Scissors Game
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 title">
+        <img class = "logo" src= "assets/images/RPSlogo.png">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card players">
+          <div class="card-header player1">
+            Login to Play!
+          </div>
+          <div class="card-body pick">
+            <h4 class="card-title"></h4>
+            <p class="card-text player1choice"></p>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="player1">Sign in to Play!</div>
-                <div class="player1choice"></div>
-            </div>
-            
-            <div class="col-md-4">
-                <!-- Button trigger modal -->
-<button type="button" class="login btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Login</button>
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalCenterTitle">Login</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                    <form>
-                            <div class="form-group">
-                              <label for="exampleInputEmail1">Name</label>
-                              <input type="playerName" class="form-control name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
-                            </div>
-                            <button type="submit" class="btn btn-primary submit">Submit</button>
-                          </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+        <button type="button" class="login btn btn-secondary" data-toggle="modal"
+          data-target="#exampleModalCenter">Login</button>
+      </div>
+
+      <div class="col-md-4 popup">
+        <!-- Button trigger modal -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input type="playerName" class="form-control name" id="exampleInputEmail1"
+                      aria-describedby="emailHelp" placeholder="Enter name">
+                  </div>
+                  <button type="submit" class="btn btn-primary submit">Submit</button>
+                </form>
+              </div>
+              <div class="modal-footer footy">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-                <div class="results">Results</div>
-                <div class="resultsbox"></div>
-                <div class="chat">Chat</div>
-                <div class="chatbox">
-                  <form>
-                    <input type="text" id="message" name="chatfield">
-                    <input type="submit" id="send" value="Submit">
-                  </form>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="player2">Sign in to Play!</div>
-                <div class="player2choice"></div>
-            </div>
+        <div class="card results">
+          <div class="card-header head">
+            Results
+          </div>
+          <div class="card-body pick">
+            <h4 class="card-title"></h4>
+            <p class="card-text resultsbox"></p>
+          </div>
         </div>
+      <div class = "holychat">
+        <div class ="chatholder">
+        <div class="chat">Chat</div>
+        <div class="chatcontainer">
+          <div class="chatbox" id="ecran"></div>
+          <form class="chatentry">
+            <input type="text" id="message" name="chatfield">
+            <input type="submit" id="send" value="Submit">
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
+      <div class="col-md-4">
+        <div class="card players">
+          <div class="card-header player2">
+           Login to Play!
+          </div>
+          <div class="card-body pick">
+            <h4 class="card-title"></h4>
+            <p class="card-text player2choice"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
 
 
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <!-- link to firebase -->
-    <!-- <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase.js"></script> -->
-    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-    <!-- Link to Moment.js should go here -->
-    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-    <!-- my code -->
-    <script src="assets/javascript/rps.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!-- link to firebase -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/5.0.0/firebase.js"></script> -->
+  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+  <!-- Link to Moment.js should go here -->
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  <!-- my code -->
+  <script src="assets/javascript/rps.js"></script>
 </body>
 
 </html>
