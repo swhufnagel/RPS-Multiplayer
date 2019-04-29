@@ -61,8 +61,14 @@ function generateBtns() {
   }
 }
 function showGuesses() {
-  $(".player1choice").html(playerOneData.choice);
-  $(".player2choice").html(playerTwoData.choice);
+  var play1 = $(".player1choice").html("<img class = 'playpic1' src='assets/images/" + playerOneData.choice + ".png'>");
+  var play2 = $(".player2choice").html("<img class = 'playpic2' src='assets/images/" + playerTwoData.choice + ".png'>");
+  if(playerOneData.choice === "rock"){
+play1.addClass("turnRight");
+  }
+  if(playerTwoData.choice === "rock"){
+play2.addClass("turnLeft");
+  }
 }
 function checkWin() {
     if (playerOneData.choice === playerTwoData.choice) {
@@ -107,6 +113,8 @@ function playAgain() {
   button.html("Play Again");
   $(".results").append(button);
   $(document).on("click", ".playAgain", function () {
+    $(".player1choice").removeClass("turnRight");
+    $(".player2choice").removeClass("turnLeft");
             database.ref("playAgain").set({
               playAgain: true
             })
@@ -223,7 +231,7 @@ $(window).on("load", function () {
   })
 $(document).on("click", ".submit", function () {
   event.preventDefault();
-  if (currentPlayers === 0){
+  if ($(".name").val().trim() !== "" && currentPlayers === 0){
     var scoreboard = $("<div>");
     scoreboard.addClass("card score1");
     var cardHeader = $("<div>");
@@ -284,7 +292,6 @@ $(document).on("click", ".submit", function () {
         players: players.number
       })
       $(".login").addClass('hide');
-      $(".login")
       database.ref("players/" + currentPlayers).set({
         name: $(".name").val().trim() + "2",
         choice: ""
