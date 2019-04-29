@@ -10,6 +10,17 @@ body{
     min-height: 762px;
     display:grid;
 }
+.score1{
+    margin-top:50px;
+    width:100px;
+    text-align:center;
+}
+.score2{
+    margin-top:30px;
+    width:100px;
+    float:right;
+    text-align:center;
+}
 .container{
       width:auto;
   }
@@ -21,10 +32,9 @@ body{
 .chatbox{
     border: 1px gray solid;
     width: 85%;
-    height: 72%;
+    height: 150px;
     position:relative;
     top:10px;
-    display: grid;
     margin-left: auto;
     margin-right: auto;
     overflow: auto;
@@ -44,6 +54,10 @@ body{
     background-color: aqua;
     background: rgba(3, 148, 136, 0.671);
 }
+.scores{
+    background-color: aqua;
+    background: rgba(3, 148, 136, 0.671);
+}
 .chatcontainer{
     border: 1px darkgrey solid;
     width:90%;
@@ -60,7 +74,7 @@ body{
     margin-right:auto;
     margin-left:auto;
     display:block;
-    margin-top:10px;
+    margin-top:-60px;
     min-width:250px;
     position:relative;
     left: 190px;
@@ -100,6 +114,9 @@ background-color: rgba(119, 119, 119, 0.596);
 .footy{
     background-color: rgba(17, 139, 139, 0.712);
 }
+.text1, .text2{
+    padding:2px;
+}
 .choice, .choice2{
 margin:5px;
 }
@@ -110,6 +127,13 @@ margin:5px;
     margin-left: auto;
     margin-right: auto;
     left: 20px;
+}
+.playAgain{
+    background-color: rgba(17, 139, 139, 0.712);
+}
+.playAgain:hover{
+    text-shadow: 3x 2px 2px 1px darkgrey;
+    color:white;
 }
 #send{
     box-shadow: 3px 2px 1px 0px black;
@@ -127,10 +151,8 @@ margin:5px;
     background-color: rgba(255, 255, 255, 0.384);
     border: grey 1px solid;
 }
-.player1choice{
-    min-height:75px;
-}
-.player2choice{
+.player1choice,.player2choice{
+    text-align:center;
     min-height:75px;
 }
 .fade.in {
@@ -166,6 +188,34 @@ margin:5px;
   .sentholder{
     text-align: right;
     margin: 5px;
+  }
+  .playpic1{
+      height:100px;
+      width:100px;
+  }
+  .playpic2{
+      height:100px;
+      width:100px;
+      -moz-transform: scaleX(-1);
+      -o-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      filter: FlipH;
+      -ms-filter: "FlipH";
+  }
+  .turnRight{
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+  .turnLeft{
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
   }
   .repliesholder{
     text-align: left;
@@ -222,16 +272,20 @@ margin:5px;
     .players{ min-width:150px;}
     .login{right:50px;}
     .logo{left:70px;}
-    .holychat{left:120px;}
+    .holychat{left:120px;min-width:230px;}
   }
   @media only screen and (max-width: 580px){
     .col1{margin-right:5px;}
     .col2{ margin-right:5px;}
     .results{ min-width:0px;}
     .players{ min-width:0px;}
-    .logo{left:30px;}
-    .holychat{left:75px;}
-    .login{right:40px;}
+    .logo{left:20px;}
+    .holychat{left: 73px;min-width:200px;}
+    .login{right:45px;}
+    .score1{right:40px;}
+    .score2{left:75px;margin-top:20px;}
+    .chatentry{right:40px;
+    }
   }
   @media only screen and (max-width: 370px){
     .col1{margin-right:0px;}
@@ -239,6 +293,6 @@ margin:5px;
     .results{ min-width:0px;}
     .players{ min-width:0px;}
     .logo{left:30px;}
-    .holychat{left:75px;}
+    .holychat{left:67px;}
     .login{right:40px;}
   }

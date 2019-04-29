@@ -35,7 +35,6 @@ var user = firebase.auth().signInAnonymously();
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     // User is signed in.
-    var isAnonymous = user.isAnonymous;
     uid = user.uid;
   } else {
     // User is signed out.
@@ -62,12 +61,23 @@ function generateBtns() {
   }
 }
 function showGuesses() {
-  $(".player1choice").html(playerOneData.choice);
-  $(".player2choice").html(playerTwoData.choice);
+  var play1 = $(".player1choice").html("<img class = 'playpic1' src='assets/images/" + playerOneData.choice + ".png'>");
+  var play2 = $(".player2choice").html("<img class = 'playpic2' src='assets/images/" + playerTwoData.choice + ".png'>");
+  if(playerOneData.choice === "rock"){
+play1.addClass("turnRight");
+  }
+  if(playerTwoData.choice === "rock"){
+play2.addClass("turnLeft");
+  }
 }
 function checkWin() {
     if (playerOneData.choice === playerTwoData.choice) {
       scoreboard.ties += 1;
+      database.ref("/score").set({
+        wins1: scoreboard.wins1,
+        wins2: scoreboard.wins2,
+        ties: scoreboard.ties
+      })
       $(".resultsbox").html("Tie!");
       showGuesses();
       playAgain();
@@ -75,6 +85,11 @@ function checkWin() {
     else if (playerOneData.choice === 'rock' && playerTwoData.choice === 'scissors' || playerOneData.choice === 'scissors' && playerTwoData.choice === 'paper' ||
       playerOneData.choice === 'paper' && playerTwoData.choice === 'rock') {
       scoreboard.wins1 += 1;
+      database.ref("/score").set({
+        wins1: scoreboard.wins1,
+        wins2: scoreboard.wins2,
+        ties: scoreboard.ties
+      })
       $(".resultsbox").html(playerOneData.name + " Wins!")
       showGuesses();
       playAgain();
@@ -82,6 +97,11 @@ function checkWin() {
     else if (playerOneData.choice === 'rock' && playerTwoData.choice === 'paper' || playerOneData.choice === 'scissors' && playerTwoData.choice === 'rock' ||
       playerOneData.choice === 'paper' && playerTwoData.choice === 'scissors') {
       scoreboard.wins2 += 1;
+      database.ref("/score").set({
+        wins1: scoreboard.wins1,
+        wins2: scoreboard.wins2,
+        ties: scoreboard.ties
+      })
       $(".resultsbox").html(playerTwoData.name + " Wins!");
       showGuesses();
       playAgain();
@@ -93,6 +113,8 @@ function playAgain() {
   button.html("Play Again");
   $(".results").append(button);
   $(document).on("click", ".playAgain", function () {
+    $(".player1choice").removeClass("turnRight");
+    $(".player2choice").removeClass("turnLeft");
             database.ref("playAgain").set({
               playAgain: true
             })
@@ -102,7 +124,6 @@ database.ref("playAgain").on("value", function(snapshot){
     if(snapshot.val().playAgain === true){
     $(".player1choice").empty();
     $(".player2choice").empty();
-    $(".player1Choice").append("Choose!");
     generateBtns();
     $("button").remove(".playAgain");
     $(".resultsbox").html("");
@@ -130,8 +151,9 @@ playersRef.on("value", function (snapshot) {
   playerTwoData = snapshot.child("1").val();
 
   if (playerOneExists) {
+    console.log("hello");
     //Jquery displayer user 1 info
-    $(".player1").html(playerOneData.name);
+    $(".player1").html("").html(playerOneData.name);
   }
   else {
     //waiting for player 1
@@ -139,12 +161,15 @@ playersRef.on("value", function (snapshot) {
 
   if (playerTwoExists) {
     //displayer user 2
-    $(".player2").html(playerTwoData.name)
+    $(".player2").html("").html(playerTwoData.name)
   } else {
     $(".player2").html("Waiting...");
     //waiting for player two
   }
-
+})
+database.ref("score").on("value", function(snapshot){
+  $(".text1").html("Wins: " + snapshot.val().wins1 + "<br> Ties: " + snapshot.val().ties);
+  $(".text2").html("Wins: " + snapshot.val().wins2 + "<br> Ties: " + snapshot.val().ties);
 })
 $(window).on("load", function () {
   database.ref().set({});
@@ -206,7 +231,44 @@ $(window).on("load", function () {
   })
 $(document).on("click", ".submit", function () {
   event.preventDefault();
+  if ($(".name").val().trim() !== "" && currentPlayers === 0){
+    var scoreboard = $("<div>");
+    scoreboard.addClass("card score1");
+    var cardHeader = $("<div>");
+    cardHeader.addClass("card-header scores");
+    cardHeader.text("Score");
+    scoreboard.append(cardHeader);
+    var cardBody = $("<div>");
+    cardBody.addClass("card-body pick");
+    scoreboard.append(cardBody);
+    var cardTitle = $("<div>");
+    cardTitle.addClass("card-title");
+    cardBody.append(cardTitle);
+    var cardText = $("<div>");
+    cardText.addClass("card-text text1");
+    cardText.html("Wins: 0 <br> Ties: 0");
+    $(".holychat").attr("style", "margin-top:-150px")
+    cardBody.append(cardText);
+    $(".score1").append(scoreboard);
+  }
   if (currentPlayers === 1) {
+    var scoreboard = $("<div>");
+    scoreboard.addClass("card score2");
+    var cardHeader = $("<div>");
+    cardHeader.addClass("card-header scores");
+    cardHeader.text("Score");
+    scoreboard.append(cardHeader);
+    var cardBody = $("<div>");
+    cardBody.addClass("card-body pick");
+    scoreboard.append(cardBody);
+    var cardTitle = $("<div>");
+    cardTitle.addClass("card-title");
+    cardBody.append(cardTitle);
+    var cardText = $("<p>");
+    cardText.addClass("card-text text2");
+    cardText.html("Wins: 0 <br> Ties: 0");
+    cardBody.append(cardText);
+    $(".score2").append(scoreboard);
     $(".login").addClass('hide');
     $("body").removeClass("modal-open");
   }
@@ -230,7 +292,6 @@ $(document).on("click", ".submit", function () {
         players: players.number
       })
       $(".login").addClass('hide');
-      
       database.ref("players/" + currentPlayers).set({
         name: $(".name").val().trim() + "2",
         choice: ""
@@ -258,11 +319,6 @@ $(document).on("click", ".choice", function () {
     player1: players.player1Picked,
     player2: players.player2Picked
   });
-  // database.ref("/players/1").set({
-  //   name: $(".player2").text(),
-  //   choice: playerTwoData.choice
-  // });
-  
   $(".player1choice").empty();
 })
 $(document).on("click", ".choice2", function () {
@@ -276,8 +332,4 @@ $(document).on("click", ".choice2", function () {
     player1: players.player1Picked,
     player2: players.player2Picked
   });
-  // database.ref("/players/0").set({
-  //   name: $(".player1").text(),
-  //   choice: playerOneData.choice
-  // });
 })
