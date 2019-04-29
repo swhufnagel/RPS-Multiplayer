@@ -19,6 +19,7 @@ var playerTwoExists;
 var playerOneData;
 var playerTwoData;
 var uid;
+// var playAgain;
 var config = {
   apiKey: "AIzaSyB08z3Po7GOR_UOFWv55Tg9gjCycdrBk3o",
   authDomain: "multiplay-rps.firebaseapp.com",
@@ -65,22 +66,9 @@ function showGuesses() {
   $(".player2choice").html(playerTwoData.choice);
 }
 function checkWin() {
-  console.log(playerOneData.choice);
-  console.log(playerTwoData.choice);
-  console.log(players.player2Choice);
-  console.log(players.player1Choice);
-  database.ref("/players/1").set({
-    name: $(".player2").text(),
-    choice: players.player2Choice
-  });
-  database.ref("/players/0").set({
-    name: $(".player1").text(),
-    choice: players.player1Choice
-  });
     if (playerOneData.choice === playerTwoData.choice) {
       scoreboard.ties += 1;
       $(".resultsbox").html("Tie!");
-      console.log("tie");
       showGuesses();
       playAgain();
     }
@@ -90,8 +78,6 @@ function checkWin() {
       $(".resultsbox").html(playerOneData.name + " Wins!")
       showGuesses();
       playAgain();
-      console.log("win");
-
     }
     else if (playerOneData.choice === 'rock' && playerTwoData.choice === 'paper' || playerOneData.choice === 'scissors' && playerTwoData.choice === 'rock' ||
       playerOneData.choice === 'paper' && playerTwoData.choice === 'scissors') {
@@ -99,8 +85,6 @@ function checkWin() {
       $(".resultsbox").html(playerTwoData.name + " Wins!");
       showGuesses();
       playAgain();
-      console.log("loss");
-
     }
   }
 function playAgain() {
@@ -109,6 +93,13 @@ function playAgain() {
   button.html("Play Again");
   $(".results").append(button);
   $(document).on("click", ".playAgain", function () {
+            database.ref("playAgain").set({
+              playAgain: true
+            })
+  })
+}
+database.ref("playAgain").on("value", function(snapshot){
+    if(snapshot.val().playAgain === true){
     $(".player1choice").empty();
     $(".player2choice").empty();
     $(".player1Choice").append("Choose!");
@@ -119,8 +110,15 @@ function playAgain() {
     players.player2Choice = "";
     players.player1Picked = false;
     players.player2Picked = false;
-  })
-}
+    database.ref("playAgain").set({
+      playAgain: false
+    })
+    database.ref("/picked").set({
+    player1: false,
+    player2: false
+    })
+    }
+})
 // Initialize Firebase
 playersRef.on("value", function (snapshot) {
   currentPlayers = snapshot.numChildren();
@@ -169,7 +167,7 @@ $(window).on("load", function () {
   })
   database.ref("/count").on("value", function(snapshot){
     if(snapshot.val().players > 1){
-      $(".login").addClass('hide');
+      $(".login").attr("display", "none");
     }
   })
   database.ref("/picked").on("value", function(snapshot){
@@ -210,15 +208,18 @@ $(document).on("click", ".submit", function () {
   event.preventDefault();
   if (currentPlayers === 1) {
     $(".login").addClass('hide');
+    $("body").removeClass("modal-open");
   }
   if (currentPlayers >= 2) {
     alert("Error: Game is Full");
   }
   if ($(".name").val().trim() !== "" && currentPlayers < 2) {
     players.number++;
+    if(players.number < 3){
     database.ref("count/").set({
       players: players.number
     })
+  }
     $(".modal").removeClass("in");
     $("div").remove(".modal-backdrop");
     $(".modal").attr("style='display:block;'");
@@ -229,6 +230,7 @@ $(document).on("click", ".submit", function () {
         players: players.number
       })
       $(".login").addClass('hide');
+      
       database.ref("players/" + currentPlayers).set({
         name: $(".name").val().trim() + "2",
         choice: ""
@@ -246,17 +248,15 @@ $(document).on("click", ".submit", function () {
 })
 
 $(document).on("click", ".choice", function () {
-  console.log('choice clicked')
   players.player1Choice = $(this).attr("id");
   players.player1Picked = true;
-  database.ref("/picked").set({
-    player1: players.player1Picked,
-    player2: players.player2Picked
-  });
-  console.log('player1', playerOneData);
   database.ref("/players/0").set({
     name: $(".player1").text(),
     choice: players.player1Choice
+  });
+  database.ref("/picked").set({
+    player1: players.player1Picked,
+    player2: players.player2Picked
   });
   // database.ref("/players/1").set({
   //   name: $(".player2").text(),
@@ -266,24 +266,18 @@ $(document).on("click", ".choice", function () {
   $(".player1choice").empty();
 })
 $(document).on("click", ".choice2", function () {
-  console.log('choice 2 clicked')
-
-  database.ref().on('value', function(snapshot) {
-    console.log('snapshot', snapshot);
-  });
   players.player2Choice = $(this).attr("id");
   players.player2Picked = true;
-  database.ref("/picked").set({
-    player1: players.player1Picked,
-    player2: players.player2Picked
-  });
-  console.log('player2', players.player2Choice);
-  // database.ref("/players/0").set({
-  //   name: $(".player1").text(),
-  //   choice: playerOneData.choice
-  // });
   database.ref("/players/1").set({
     name: $(".player2").text(),
     choice: players.player2Choice
   });
+  database.ref("/picked").set({
+    player1: players.player1Picked,
+    player2: players.player2Picked
+  });
+  // database.ref("/players/0").set({
+  //   name: $(".player1").text(),
+  //   choice: playerOneData.choice
+  // });
 })
