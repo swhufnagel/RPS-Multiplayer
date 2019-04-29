@@ -10,6 +10,17 @@ body{
     min-height: 762px;
     display:grid;
 }
+.score1{
+    margin-top:50px;
+    width:100px;
+    text-align:center;
+}
+.score2{
+    margin-top:30px;
+    width:100px;
+    float:right;
+    text-align:center;
+}
 .container{
       width:auto;
   }
@@ -60,7 +71,7 @@ body{
     margin-right:auto;
     margin-left:auto;
     display:block;
-    margin-top:10px;
+    margin-top:-60px;
     min-width:250px;
     position:relative;
     left: 190px;
@@ -127,10 +138,8 @@ margin:5px;
     background-color: rgba(255, 255, 255, 0.384);
     border: grey 1px solid;
 }
-.player1choice{
-    min-height:75px;
-}
-.player2choice{
+.player1choice,.player2choice{
+    text-align:center;
     min-height:75px;
 }
 .fade.in {
