@@ -1,23 +1,22 @@
+
 .resultsbox{
-    width: 90%;
+    /* width: 90%; */
     height: 100%;
     min-height:50px;
 }
 body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background: linear-gradient(rgba(3, 148, 136, 0.671)1%,rgba(170, 91, 0, 0.589)105%,silver 0%)!important;
-    min-height: 760px;
+    min-height: 762px;
     display:grid;
 }
-.element {
-    /* this is the same as grid-template-columns: 1fr 1fr 1fr 1fr; */
-    grid-template-columns: repeat(4, 1fr);
-    /* this is the same as grid-template-rows: 300px 300px; */
-    grid-template-rows: repeat(2, 300px);
+.container{
+      width:auto;
   }
 .results{
-    margin-bottom: 10px;
+    margin-bottom: 45px;
     text-align:center;
+    min-width:160px;
 }
 .chatbox{
     border: 1px gray solid;
@@ -38,10 +37,8 @@ body{
     padding:0;
 }
 .players{
-    margin-left: auto;
-    margin-right: auto;
-    flex-direction: row;
     max-width: 200px;
+    min-width:200px;
 }
 .player1, .player2, .head{
     background-color: aqua;
@@ -60,6 +57,13 @@ body{
 .holychat{
     background-color: white;
     z-index:3;
+    margin-right:auto;
+    margin-left:auto;
+    display:block;
+    margin-top:10px;
+    min-width:250px;
+    position:relative;
+    left: 190px;
 }
 .login:hover{
     background-color: rgba(70, 189, 179, 0.521);
@@ -110,24 +114,24 @@ margin:5px;
 #send{
     box-shadow: 3px 2px 1px 0px black;
     font-size:10px;
+    background-color: rgba(68, 239, 245, 0.356);
+    left: 10px;
+    position:relative;
+    top:2px;
 }
 #message{
-    width:70%;
-    float: left; 
-    margin: 2px;
+    position:relative;
+    left: 5px;
+    width:110%; 
     font-size:12px;
     background-color: rgba(255, 255, 255, 0.384);
     border: grey 1px solid;
 }
 .player1choice{
-    width: 50%;
-    height: 100%;
-    min-height:100px;
+    min-height:75px;
 }
 .player2choice{
-    width: 50%;
-    height: 100%;
-    min-height:100px;
+    min-height:75px;
 }
 .fade.in {
     opacity: 1;
@@ -150,13 +154,6 @@ margin:5px;
       background-color: lightgray;
       border-radius: 19%;
       margin:5px;
-  }
-  #send{
-      background-color: rgba(68, 239, 245, 0.356);
-      float:right;
-      right: 6px;
-      position:relative;
-      top:2px;
   }
   #send:hover{
       border: 1px black solid;
@@ -196,12 +193,6 @@ margin:5px;
   .hide{
       display:none;
   }
-  .title{
-      font-size:58px;
-      font-weight: 700;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-  }
   .submit{
     box-shadow: 3px 3px 2px 0px black;
     background-color: rgba(0, 169, 175, 0.795);
@@ -211,26 +202,43 @@ margin:5px;
   .logo{
       height:250px;
       width:360px;
+      margin-left: auto!important;
+      margin-right: auto;
+      position: relative;
+      left:130px;
   }
-  @media only screen and (max-width: 991px){
-      #message{
-        position: relative;
-        top: 20px;
-        right: 14px;
-      }
-      #send{
-          top:-3px;
-      }
+  .col1{
+      margin-right: 30px;
   }
-  @media only screen and (max-width: 767px){
-        .holychat{
-            width:50%;
-            height:50%;
-        }
-        .card{
-            width: 50%;
-        }
-        .players{
-            width:25%;
-        }
+  .col2{
+    margin-right: 30px;
+
+  }
+
+  @media only screen and (max-width: 768px){
+    .col1{margin-right:10px;}
+    .col2{ margin-right:10px;}
+    .results{ min-width:150px;}
+    .players{ min-width:150px;}
+    .login{right:50px;}
+    .logo{left:70px;}
+    .holychat{left:120px;}
+  }
+  @media only screen and (max-width: 580px){
+    .col1{margin-right:5px;}
+    .col2{ margin-right:5px;}
+    .results{ min-width:0px;}
+    .players{ min-width:0px;}
+    .logo{left:30px;}
+    .holychat{left:75px;}
+    .login{right:40px;}
+  }
+  @media only screen and (max-width: 370px){
+    .col1{margin-right:0px;}
+    .col2{ margin-right:0px;}
+    .results{ min-width:0px;}
+    .players{ min-width:0px;}
+    .logo{left:30px;}
+    .holychat{left:75px;}
+    .login{right:40px;}
   }
