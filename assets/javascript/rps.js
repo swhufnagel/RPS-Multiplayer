@@ -68,6 +68,8 @@ function checkWin() {
     if (playerOneData.choice === playerTwoData.choice) {
       scoreboard.ties += 1;
       database.ref("/score").set({
+        wins1: scoreboard.wins1,
+        wins2: scoreboard.wins2,
         ties: scoreboard.ties
       })
       $(".resultsbox").html("Tie!");
@@ -78,7 +80,9 @@ function checkWin() {
       playerOneData.choice === 'paper' && playerTwoData.choice === 'rock') {
       scoreboard.wins1 += 1;
       database.ref("/score").set({
-        wins1: scoreboard.wins1
+        wins1: scoreboard.wins1,
+        wins2: scoreboard.wins2,
+        ties: scoreboard.ties
       })
       $(".resultsbox").html(playerOneData.name + " Wins!")
       showGuesses();
@@ -88,7 +92,9 @@ function checkWin() {
       playerOneData.choice === 'paper' && playerTwoData.choice === 'scissors') {
       scoreboard.wins2 += 1;
       database.ref("/score").set({
-        wins2: scoreboard.wins2
+        wins1: scoreboard.wins1,
+        wins2: scoreboard.wins2,
+        ties: scoreboard.ties
       })
       $(".resultsbox").html(playerTwoData.name + " Wins!");
       showGuesses();
@@ -135,8 +141,7 @@ playersRef.on("value", function (snapshot) {
 
   playerOneData = snapshot.child("0").val();
   playerTwoData = snapshot.child("1").val();
-})
-playersRef.on("child_added", function (snapshot) {
+
   if (playerOneExists) {
     console.log("hello");
     //Jquery displayer user 1 info
@@ -153,11 +158,10 @@ playersRef.on("child_added", function (snapshot) {
     $(".player2").html("Waiting...");
     //waiting for player two
   }
-
 })
 database.ref("score").on("value", function(snapshot){
-  $(".text1").text("Wins: " + snapshot.val().wins1 + "<br> Ties: " + snapshot.val().ties);
-  $(".text2").text("Wins: " + snapshot.val().wins2 + "<br> Ties: " + snapshot.val().ties);
+  $(".text1").html("Wins: " + snapshot.val().wins1 + "<br> Ties: " + snapshot.val().ties);
+  $(".text2").html("Wins: " + snapshot.val().wins2 + "<br> Ties: " + snapshot.val().ties);
 })
 $(window).on("load", function () {
   database.ref().set({});
@@ -223,7 +227,7 @@ $(document).on("click", ".submit", function () {
     var scoreboard = $("<div>");
     scoreboard.addClass("card score1");
     var cardHeader = $("<div>");
-    cardHeader.addClass("card-header player1");
+    cardHeader.addClass("card-header scores");
     cardHeader.text("Score");
     scoreboard.append(cardHeader);
     var cardBody = $("<div>");
@@ -234,7 +238,8 @@ $(document).on("click", ".submit", function () {
     cardBody.append(cardTitle);
     var cardText = $("<div>");
     cardText.addClass("card-text text1");
-    cardText.text("Wins: 0");
+    cardText.html("Wins: 0 <br> Ties: 0");
+    $(".holychat").attr("style", "margin-top:-150px")
     cardBody.append(cardText);
     $(".score1").append(scoreboard);
   }
@@ -242,7 +247,7 @@ $(document).on("click", ".submit", function () {
     var scoreboard = $("<div>");
     scoreboard.addClass("card score2");
     var cardHeader = $("<div>");
-    cardHeader.addClass("card-header player2");
+    cardHeader.addClass("card-header scores");
     cardHeader.text("Score");
     scoreboard.append(cardHeader);
     var cardBody = $("<div>");
@@ -253,12 +258,11 @@ $(document).on("click", ".submit", function () {
     cardBody.append(cardTitle);
     var cardText = $("<p>");
     cardText.addClass("card-text text2");
-    cardText.text("Wins: 0");
+    cardText.html("Wins: 0 <br> Ties: 0");
     cardBody.append(cardText);
     $(".score2").append(scoreboard);
     $(".login").addClass('hide');
     $("body").removeClass("modal-open");
-    $(".holychat").attr("style", "margin-top:-120px")
   }
   if (currentPlayers >= 2) {
     alert("Error: Game is Full");

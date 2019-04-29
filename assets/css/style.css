@@ -32,10 +32,9 @@ body{
 .chatbox{
     border: 1px gray solid;
     width: 85%;
-    height: 72%;
+    height: 150px;
     position:relative;
     top:10px;
-    display: grid;
     margin-left: auto;
     margin-right: auto;
     overflow: auto;
@@ -52,6 +51,10 @@ body{
     min-width:200px;
 }
 .player1, .player2, .head{
+    background-color: aqua;
+    background: rgba(3, 148, 136, 0.671);
+}
+.scores{
     background-color: aqua;
     background: rgba(3, 148, 136, 0.671);
 }
@@ -111,6 +114,9 @@ background-color: rgba(119, 119, 119, 0.596);
 .footy{
     background-color: rgba(17, 139, 139, 0.712);
 }
+.text1, .text2{
+    padding:2px;
+}
 .choice, .choice2{
 margin:5px;
 }
@@ -121,6 +127,13 @@ margin:5px;
     margin-left: auto;
     margin-right: auto;
     left: 20px;
+}
+.playAgain{
+    background-color: rgba(17, 139, 139, 0.712);
+}
+.playAgain:hover{
+    text-shadow: 3x 2px 2px 1px darkgrey;
+    color:white;
 }
 #send{
     box-shadow: 3px 2px 1px 0px black;
