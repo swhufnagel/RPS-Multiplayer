@@ -120,6 +120,47 @@ function playAgain() {
             })
   })
 }
+function createScore(){
+  var scoreboard = $("<div>");
+    scoreboard.addClass("card score1");
+    var cardHeader = $("<div>");
+    cardHeader.addClass("card-header scores");
+    cardHeader.text("Score");
+    scoreboard.append(cardHeader);
+    var cardBody = $("<div>");
+    cardBody.addClass("card-body pick");
+    scoreboard.append(cardBody);
+    var cardTitle = $("<div>");
+    cardTitle.addClass("card-title");
+    cardBody.append(cardTitle);
+    var cardText = $("<div>");
+    cardText.addClass("card-text text1");
+    cardText.html("Wins: 0 <br> Ties: 0");
+    $(".holychat").attr("style", "margin-top:-150px")
+    cardBody.append(cardText);
+    $(".score1").html(scoreboard);
+}
+function createScore2(){
+  var scoreboard = $("<div>");
+    scoreboard.addClass("card score2");
+    var cardHeader = $("<div>");
+    cardHeader.addClass("card-header scores");
+    cardHeader.text("Score");
+    scoreboard.append(cardHeader);
+    var cardBody = $("<div>");
+    cardBody.addClass("card-body pick");
+    scoreboard.append(cardBody);
+    var cardTitle = $("<div>");
+    cardTitle.addClass("card-title");
+    cardBody.append(cardTitle);
+    var cardText = $("<p>");
+    cardText.addClass("card-text text2");
+    cardText.html("Wins: 0 <br> Ties: 0");
+    cardBody.append(cardText);
+    $(".score2").html(scoreboard);
+    $(".login").addClass('hide');
+    $("body").removeClass("modal-open");
+}
 database.ref("playAgain").on("value", function(snapshot){
     if(snapshot.val().playAgain === true){
     $(".player1choice").empty();
@@ -151,9 +192,10 @@ playersRef.on("value", function (snapshot) {
   playerTwoData = snapshot.child("1").val();
 
   if (playerOneExists) {
-    console.log("hello");
     //Jquery displayer user 1 info
     $(".player1").html("").html(playerOneData.name);
+    createScore();
+    console.log("created");
   }
   else {
     //waiting for player 1
@@ -161,7 +203,9 @@ playersRef.on("value", function (snapshot) {
 
   if (playerTwoExists) {
     //displayer user 2
-    $(".player2").html("").html(playerTwoData.name)
+    $(".player2").html("").html(playerTwoData.name);
+    createScore2();
+
   } else {
     $(".player2").html("Waiting...");
     //waiting for player two
@@ -176,6 +220,7 @@ $(window).on("load", function () {
   var playing = false;
   playersRef.on("value", function(){
     if(currentPlayers=== 2 & playing === false){
+    $("div").remove(".fade");
     generateBtns();
     playing = true;
     }
@@ -199,9 +244,12 @@ $(window).on("load", function () {
     if(snapshot.val().player1 === true){
       $(".player1choice").empty();
       players.player1Picked = true;
+      console.log("p1waiting");
+      $(".player1choice").html("waiting...");
     }
     if(snapshot.val().player2 === true){
       $(".player2choice").empty();
+      $(".player2choice").html("waiting...");
       players.player2Picked = true;
 
     }
@@ -232,45 +280,45 @@ $(window).on("load", function () {
 $(document).on("click", ".submit", function () {
   event.preventDefault();
   if ($(".name").val().trim() !== "" && currentPlayers === 0){
-    var scoreboard = $("<div>");
-    scoreboard.addClass("card score1");
-    var cardHeader = $("<div>");
-    cardHeader.addClass("card-header scores");
-    cardHeader.text("Score");
-    scoreboard.append(cardHeader);
-    var cardBody = $("<div>");
-    cardBody.addClass("card-body pick");
-    scoreboard.append(cardBody);
-    var cardTitle = $("<div>");
-    cardTitle.addClass("card-title");
-    cardBody.append(cardTitle);
-    var cardText = $("<div>");
-    cardText.addClass("card-text text1");
-    cardText.html("Wins: 0 <br> Ties: 0");
-    $(".holychat").attr("style", "margin-top:-150px")
-    cardBody.append(cardText);
-    $(".score1").append(scoreboard);
+    // var scoreboard = $("<div>");
+    // scoreboard.addClass("card score1");
+    // var cardHeader = $("<div>");
+    // cardHeader.addClass("card-header scores");
+    // cardHeader.text("Score");
+    // scoreboard.append(cardHeader);
+    // var cardBody = $("<div>");
+    // cardBody.addClass("card-body pick");
+    // scoreboard.append(cardBody);
+    // var cardTitle = $("<div>");
+    // cardTitle.addClass("card-title");
+    // cardBody.append(cardTitle);
+    // var cardText = $("<div>");
+    // cardText.addClass("card-text text1");
+    // cardText.html("Wins: 0 <br> Ties: 0");
+    // $(".holychat").attr("style", "margin-top:-150px")
+    // cardBody.append(cardText);
+    // $(".score1").append(scoreboard);
   }
   if (currentPlayers === 1) {
-    var scoreboard = $("<div>");
-    scoreboard.addClass("card score2");
-    var cardHeader = $("<div>");
-    cardHeader.addClass("card-header scores");
-    cardHeader.text("Score");
-    scoreboard.append(cardHeader);
-    var cardBody = $("<div>");
-    cardBody.addClass("card-body pick");
-    scoreboard.append(cardBody);
-    var cardTitle = $("<div>");
-    cardTitle.addClass("card-title");
-    cardBody.append(cardTitle);
-    var cardText = $("<p>");
-    cardText.addClass("card-text text2");
-    cardText.html("Wins: 0 <br> Ties: 0");
-    cardBody.append(cardText);
-    $(".score2").append(scoreboard);
-    $(".login").addClass('hide');
-    $("body").removeClass("modal-open");
+    // var scoreboard = $("<div>");
+    // scoreboard.addClass("card score2");
+    // var cardHeader = $("<div>");
+    // cardHeader.addClass("card-header scores");
+    // cardHeader.text("Score");
+    // scoreboard.append(cardHeader);
+    // var cardBody = $("<div>");
+    // cardBody.addClass("card-body pick");
+    // scoreboard.append(cardBody);
+    // var cardTitle = $("<div>");
+    // cardTitle.addClass("card-title");
+    // cardBody.append(cardTitle);
+    // var cardText = $("<p>");
+    // cardText.addClass("card-text text2");
+    // cardText.html("Wins: 0 <br> Ties: 0");
+    // cardBody.append(cardText);
+    // $(".score2").append(scoreboard);
+    // $(".login").addClass('hide');
+    // $("body").removeClass("modal-open");
   }
   if (currentPlayers >= 2) {
     alert("Error: Game is Full");
@@ -320,6 +368,7 @@ $(document).on("click", ".choice", function () {
     player2: players.player2Picked
   });
   $(".player1choice").empty();
+  
 })
 $(document).on("click", ".choice2", function () {
   players.player2Choice = $(this).attr("id");
