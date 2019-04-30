@@ -16,7 +16,7 @@ body{
     text-align:center;
 }
 .score2{
-    margin-top:30px;
+    margin-top: 25px;
     width:100px;
     float:right;
     text-align:center;
@@ -278,21 +278,34 @@ margin:5px;
     .col1{margin-right:5px;}
     .col2{ margin-right:5px;}
     .results{ min-width:0px;}
-    .players{ min-width:0px;}
+    .players{ min-width:140px;}
     .logo{left:-10px;}
-    .holychat{left: 73px;min-width:200px;}
+    .holychat{left: 100px;min-width:200px;}
     .login{right:45px;}
     .score1{right:40px;}
-    .score2{left:75px;margin-top:20px;}
-    .chatentry{right:40px;
-    }
+    .score2{left:60px;margin-top:20px;}
+    .chatentry{right:40px;}
   }
-  @media only screen and (max-width: 370px){
+  @media only screen and (max-width: 500px){
+      .players{min-width:120px;}
+      .holychat {left: 85px;min-width: 200px;}
+  }
+  @media only screen and (max-width: 390px){
+    .col1{margin-right:1px;}
+    .col2{ margin-right:1px;}
+    .results{ min-width:0px;}
+    .players{ min-width:120px;margin-left:auto;margin-right:auto;}
+    .logo{left:10px;}
+    .holychat{left:100px;min-width:175px;}
+    .login{right:40px;}
+    .score1{right:5px;}
+    .score2{left:40px;margin-top:20px;}
+    /* .moveleft{left:20px;} */
+  }
+  @media only screen and (max-width: 385px){
     .col1{margin-right:0px;}
     .col2{ margin-right:0px;}
-    .results{ min-width:0px;}
-    .players{ min-width:0px;}
-    .logo{left:30px;}
-    .holychat{left:67px;}
-    .login{right:40px;}
+    .players{ min-width:110px;}
+    .logo{left:0px;}
+    /* .moveleft{left:20px;} */
   }
